@@ -1,0 +1,14 @@
+name: "Lock"
+description: "Locks closed issues and pull requests."
+author: "tjrgg"
+inputs:
+    repo-token:
+        description: "Repository token (can be passed in using {{ secrets.GITHUB_TOKEN }})"
+        required: true
+    days-before-lock:
+        description: "The number of days of inactivity a closed issue should have before locking"
+        default: "60"
+        required: false
+runs:
+    using: "node12"
+    main: "dist/index.js"

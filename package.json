@@ -1,0 +1,70 @@
+{
+	"name": "action-lock",
+	"version": "0.1.0",
+	"description": "An action that locks inactive closed issues and pull requests",
+	"license": "Apache-2.0",
+	"author": {
+		"name": "Tyler Richards",
+		"email": "hello@tjrgg.xyz"
+	},
+	"funding": "https://github.com/tjrgg/action-lock?sponsor=1",
+	"repository": "tjrgg/action-lock",
+	"engines": {
+		"node": ">=12.0.0",
+		"npm": "use-yarn",
+		"yarn": ">=1.22.0"
+	},
+	"main": "src/index.js",
+	"scripts": {
+		"build": "ncc build src/index.js -o dist",
+		"lint": "xo",
+		"lint:fix": "xo --fix",
+		"postversion": "git push && git push --tags"
+	},
+	"dependencies": {
+		"@actions/core": "^1.2.3",
+		"@actions/github": "^2.1.1"
+	},
+	"devDependencies": {
+		"@zeit/ncc": "^0.21.1",
+		"commitlint": "^8.3.5",
+		"commitlint-config-enderverse": "Enderverse/commitlint-config-enderverse",
+		"eslint": "^6.3.0",
+		"eslint-config-enderverse": "Enderverse/eslint-config-enderverse",
+		"husky": "^4.2.3",
+		"lint-staged": "^10.0.7",
+		"xo": "^0.27.2"
+	},
+	"commitlint": {
+		"extends": [
+			"enderverse"
+		]
+	},
+	"eslintConfig": {
+		"extends": [
+			"enderverse"
+		]
+	},
+	"husky": {
+		"hooks": {
+			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"src/**/*.js": [
+			"xo --fix"
+		]
+	},
+	"xo": {
+		"extends": [
+			"enderverse"
+		],
+		"rules": {
+			"jsdoc/require-example": "off",
+			"jsdoc/require-file-overview": "off",
+			"jsdoc/require-jsdoc": "off"
+		},
+		"space": false
+	}
+}
