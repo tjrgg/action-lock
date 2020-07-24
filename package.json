@@ -19,52 +19,37 @@
 		"build": "ncc build src/index.js -o dist",
 		"lint": "xo",
 		"lint:fix": "xo --fix",
-		"postversion": "git push && git push --tags"
+		"postversion": "git push && git push --tags",
+		"update": "yarn upgrade --latest"
 	},
 	"dependencies": {
-		"@actions/core": "^1.2.3",
-		"@actions/github": "^2.1.1"
+		"@actions/core": "^1.2.4",
+		"@actions/github": "^4.0.0"
 	},
 	"devDependencies": {
-		"@zeit/ncc": "^0.21.1",
-		"commitlint": "^8.3.5",
-		"commitlint-config-enderverse": "Enderverse/commitlint-config-enderverse",
-		"eslint": "^6.3.0",
-		"eslint-config-enderverse": "Enderverse/eslint-config-enderverse",
-		"husky": "^4.2.3",
-		"lint-staged": "^10.0.7",
-		"xo": "^0.27.2"
+		"@enderverse/commitlint-config": "latest",
+		"@enderverse/eslint-config": "latest",
+		"@zeit/ncc": "^0.22.3",
+		"commitlint": "^9.1.1",
+		"eslint": "^7.5.0",
+		"husky": "^4.2.5"
 	},
 	"commitlint": {
 		"extends": [
-			"enderverse"
+			"@enderverse/commitlint-config"
 		]
 	},
 	"eslintConfig": {
 		"extends": [
-			"enderverse"
+			"@enderverse/eslint-config"
 		]
 	},
+	"eslintIgnore": [
+		"dist/**"
+	],
 	"husky": {
 		"hooks": {
-			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-			"pre-commit": "lint-staged"
+			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
 		}
-	},
-	"lint-staged": {
-		"src/**/*.js": [
-			"xo --fix"
-		]
-	},
-	"xo": {
-		"extends": [
-			"enderverse"
-		],
-		"rules": {
-			"jsdoc/require-example": "off",
-			"jsdoc/require-file-overview": "off",
-			"jsdoc/require-jsdoc": "off"
-		},
-		"space": false
 	}
 }
